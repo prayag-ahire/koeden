@@ -4,7 +4,7 @@ import * as schema from "./schema";
 
 export * from "./schema";
 
-export function createDb(databaseUrl: string) {
+export function createDb(databaseUrl: string): ReturnType<typeof drizzle> {
   const sql = neon(databaseUrl);
   return drizzle(sql, { schema });
 }

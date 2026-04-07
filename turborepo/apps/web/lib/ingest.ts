@@ -37,6 +37,11 @@ export async function ingestItem(input: IngestInput): Promise<string> {
   // chunk
   const textChunks = chunkText(input.rawContent);
 
+  // Allow empty drafts: create item first, embed only when there is content.
+  if (textChunks.length === 0) {
+    return item.id;
+  }
+
   // embed all chunks in one API call
   const vectors = await embedTexts(textChunks);
 

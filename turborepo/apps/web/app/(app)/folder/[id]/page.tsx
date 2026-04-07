@@ -1,6 +1,13 @@
 import { ItemsView } from "../../../../components/ItemsView";
 
-export default async function FolderPage({ params }: { params: Promise<{ id: string }> }) {
+export default async function FolderPage({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ id: string }>;
+  searchParams: Promise<{ openItem?: string }>;
+}) {
   const { id } = await params;
-  return <ItemsView folderId={id} />;
+  const query = await searchParams;
+  return <ItemsView folderId={id} openItemId={query.openItem} />;
 }
